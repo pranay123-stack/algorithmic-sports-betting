@@ -7,7 +7,7 @@ arbitrage detection, and staking strategy.
 exchanges and bookmakers quote decimal odds with an overround and per-book limits;
 prediction markets quote a probability in a CLOB with an order book. Arbitrage, staking and
 model calibration all work differently. Related work lives in
-[Prediction Market Systems](https://github.com/pranay123-stack/prediction-market-systems).
+[Prediction Market Algorithmic Trading](https://github.com/pranay123-stack/prediction-market-algorithmic-trading).
 
 ---
 
