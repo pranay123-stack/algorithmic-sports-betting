@@ -13,6 +13,37 @@ model calibration all work differently. Related work lives in
 
 ## Published
 
+### UK Horse Racing Quant Platform
+A full quantitative pipeline on The Racing API: ingestion, point-in-time feature
+engineering, a calibrated probability engine, an expected-value strategy layer with
+walk-forward backtesting, and a live daily prediction product served over FastAPI.
+
+**What's in it**
+- 89 point-in-time features attached by a single `as_of_join` helper, so look-ahead bias
+  is structurally impossible rather than merely avoided — the test for it caught a real
+  leak in the codebase
+- LR / XGBoost / LightGBM with Platt and isotonic calibration, race-level normalisation,
+  and a versioned, promotable model registry
+- An analysis protocol frozen and content-hashed *before* the data existed: one
+  pre-registered hypothesis, eight pre-flight gates, Bonferroni-corrected segments, and a
+  mechanical verdict function that no prose in the report can move
+- A live product: daily BET/NO_BET signals with reasons, settled performance reported with
+  its t-statistic, and a replay check proving the live path and the backtest run identical
+  code
+
+**Honest status.** 162 modules, ~23,400 lines of application code, 1,081 tests passing.
+But **the edge is unproven**: The Racing API subscription on these credentials is inactive,
+so every published number comes from synthetic data and says nothing about real racing
+markets. The apparatus is complete and tested; the verdict is blocked on billing, and the
+repository says so on its front page rather than in a footnote.
+
+**Tech:** Python 3.12, FastAPI, SQLAlchemy 2.0, PostgreSQL 16, pandas, scikit-learn,
+XGBoost, LightGBM, Docker, GitHub Actions
+
+[View repository →](https://github.com/pranay123-stack/horse-quant-platform)
+
+---
+
 ### Smarkets Sports Quant Trading
 Quantitative strategies against the Smarkets betting exchange.
 
@@ -51,16 +82,13 @@ so they are cross-listed rather than duplicated.
 
 ## Not yet published
 
-The substantial work in this domain is built but not public:
+One codebase in this domain is built but not public:
 
-- **UK horse racing quant platform** — a full pipeline on The Racing API: data ingestion,
-  feature engineering, model training and a live prediction product (CLI, dashboard and
-  API). By far the largest project in this category.
-- **NBA betting strategy** — a separate modelling codebase from the Polymarket signal work above.
-
-Together roughly 173 source files and 41 test files. Neither is a git repository yet.
-Publishing the horse racing platform would make this the best-evidenced category on my
-profile rather than the thinnest.
+- **NBA betting strategy** — a separate modelling codebase from the Polymarket signal
+  work above: data collection, model training, a daily pipeline and a prediction script,
+  plus an MLB RBI model alongside it. Roughly 1,400 lines across four modules, with no
+  tests and no git history yet — a working script set rather than a platform, which is
+  why it is listed here and not above.
 
 *Modelling vocabulary across this work: Elo ratings, expected goals (xG), Kelly staking,
 overround removal, and cross-book arbitrage.*
